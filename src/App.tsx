@@ -13,10 +13,8 @@ function App() {
 
   return (
     <div className='App'>
-      <h1>Hello from Inar</h1>
-      <p>asdfasfdasfdasdf</p>
+      <h1>This is cv site for Inar and Fox</h1>
       <p>Do you see it?</p>
-      <p>test actions</p>
       <p>Count:{num}</p>
       <button onClick={setNumber}>Plus</button>
     </div>

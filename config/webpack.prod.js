@@ -10,7 +10,7 @@ module.exports = merge(common, {
   output: {
     path: paths.build,
     filename: 'js/[name].[contenthash].bundle.js',
-    publicPath: '/react-ts-webpack/',
+    publicPath: '/fox-inar-cv/',
     clean: true,
   },
   plugins: [

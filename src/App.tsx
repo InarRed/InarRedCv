@@ -1,25 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import { Button, CssBaseline, ThemeProvider, Typography } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import { appTheme } from './styles/AppTheme';
+import BasicLayout from './pages/BasicLayout';
 
 function App() {
-  const [num, setNum] = useState(0);
-
-  const setNumber = () => {
-    const cat = { name: 'Senya', age: 12 };
-    console.log(cat);
-    setNum(num + 1);
-  };
-
   return (
     <ThemeProvider theme={appTheme}>
       <CssBaseline />
-      <Button>Cat</Button>
-      <Typography variant='h4'>
-        Cascadia Code Italic asd
-      </Typography>
-      <Typography variant='body2'>{'Cascadia Code ---->'}</Typography>
+      <BasicLayout />
     </ThemeProvider>
   );
 }

@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'Catadia';
+  src: url("CascadiaCode.ttf") format('truetype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Catadia';
+  src: url("CascadiaCodeItalic.ttf") format('truetype');
+  font-style: italic;
+}

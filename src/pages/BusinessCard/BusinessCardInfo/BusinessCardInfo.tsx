@@ -19,7 +19,9 @@ const BusinessCardInfo = ({ card }: { card: BusinessCardDto }) => {
       </div>
       <div className={s.textContainer}>
         <Typography variant='h4'>{card.name}</Typography>
-        <Typography sx={{ fontStyle: 'italic' }}>{card.myDescription}</Typography>
+        <Typography sx={{ fontStyle: 'italic', margin: '10px auto' }}>
+          {card.myDescription}
+        </Typography>
         <div className={s.divider} />
         <Typography variant='h6'>Contacts:</Typography>
         <div className={s.contactsListContainer}>

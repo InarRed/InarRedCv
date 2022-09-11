@@ -7,17 +7,17 @@ const themeOptions: ThemeOptions = {
       main: '#ff9100',
     },
     secondary: {
-      main: '#9c27b0',
+      main: '#1fb6ef',
     },
     error: {
       main: '#f44336',
     },
   },
   typography: {
-    fontFamily: 'Cascadia Code',
-    button: {
-      fontWeight: 600,
-    },
+    fontFamily: 'Roboto',
+    // button: {
+    //   fontWeight: 600,
+    // },
   },
 };
 

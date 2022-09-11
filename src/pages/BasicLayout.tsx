@@ -16,7 +16,7 @@ const BasicLayout = () => {
         </section>
         <aside className={s.rightAside} />
       </div>
-      <div className={s.footer}>footer</div>
+      <div className={s.footer}></div>
     </div>
   );
 };

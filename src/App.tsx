@@ -5,6 +5,7 @@ import { appTheme } from './styles/AppTheme';
 import BasicLayout from './pages/BasicLayout';
 import BusinessCardDto from './data/dtos/BusinessCardDto';
 import { AppContext, IAppContext } from './data/BusinessCardContext';
+import { NewsStore } from './data/NewsStore';
 
 function App() {
   const [businessCard, setBusinessCard] = useState<BusinessCardDto | null>(null);
@@ -16,6 +17,7 @@ function App() {
           {
             card: businessCard,
             setCard: setBusinessCard,
+            newsStore: new NewsStore(),
           } as IAppContext
         }
       >

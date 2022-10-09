@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import { AppContext, InitBusinessCard } from '../../data/BusinessCardContext';
+import { AppContext } from '../../data/BusinessCardContext';
 import BusinessCardInfo from './BusinessCardInfo/BusinessCardInfo';
 import BusinessCardSkills from './BusinessCardSkills/BusinessCardSkills';
 import BusinessCardProjects from './BusinessCardProjects/BusinessCardProjects';
+import { InitBusinessCard } from '../../data/BusinessCardStore';
 
 const BusinessCard = () => {
   const context = useContext(AppContext);

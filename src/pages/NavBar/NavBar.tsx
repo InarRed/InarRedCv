@@ -19,6 +19,7 @@ const NavBar = () => {
   return (
     <AppBar variant='elevation' position='static'>
       <Toolbar variant='dense'>
+        <Typography sx={{ margin: 'auto 20px', fontStyle: 'italic' }}>InarCV</Typography>
         <Tabs value={tab} onChange={handleSetTab}>
           <Tab value='cv' label='cv' />
           <Tab value='news' label='News' />

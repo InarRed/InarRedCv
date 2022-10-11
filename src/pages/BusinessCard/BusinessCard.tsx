@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { AppContext } from '../../data/BusinessCardContext';
+import { AppContext } from '../../data/AppContext';
 import BusinessCardInfo from './BusinessCardInfo/BusinessCardInfo';
 import BusinessCardSkills from './BusinessCardSkills/BusinessCardSkills';
 import BusinessCardProjects from './BusinessCardProjects/BusinessCardProjects';

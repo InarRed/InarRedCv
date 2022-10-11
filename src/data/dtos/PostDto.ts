@@ -13,3 +13,8 @@ export class PostListItemDto {
   date: Date = new Date();
   tags: { id: number; name: string }[] = [];
 }
+
+export class PostListDto {
+  data: PostListItemDto[] = [];
+  pageCount: number = 1;
+}

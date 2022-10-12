@@ -2,7 +2,7 @@ import React from 'react';
 import { BorderedCard } from '../../../components/BorderedCard/BorderedCard';
 import { Typography, useTheme } from '@mui/material';
 import BusinessCardProjectItem from './BusinessCardProjectItem';
-import BusinessCardDto from '../../../data/dtos/BusinessCardDto';
+import BusinessCardDto from '../../../data/businessCard/BusinessCardDto';
 
 const BusinessCardProjects = ({ card }: { card: BusinessCardDto }) => {
   const theme = useTheme();

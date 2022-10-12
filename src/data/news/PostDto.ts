@@ -1,11 +1,3 @@
-export class PostDto {
-  title: string = '';
-  date: Date = new Date();
-  contentPreview: string = '';
-  content: string = '';
-  tags: { id: number; name: string }[] = [];
-}
-
 export class PostListItemDto {
   id: number = 0;
   title: string = '';
@@ -17,4 +9,13 @@ export class PostListItemDto {
 export class PostListDto {
   data: PostListItemDto[] = [];
   pageCount: number = 1;
+}
+
+export class OnePostDto {
+  id: number = 0;
+  title: string = '';
+  date: Date = new Date();
+  contentPreview: string = '';
+  content: string = '';
+  tags: { id: number; name: string }[] = [];
 }

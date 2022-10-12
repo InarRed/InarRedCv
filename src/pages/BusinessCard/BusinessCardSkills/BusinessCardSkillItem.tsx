@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Collapse, List, ListItemButton, ListItemText } from '@mui/material';
-import { BcSkill } from '../../../data/dtos/BusinessCardDto';
+import { BcSkill } from '../../../data/businessCard/BusinessCardDto';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 export interface BusinessCardSkillItemProps {

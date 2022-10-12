@@ -1,6 +1,6 @@
-import BusinessCardDto from './dtos/BusinessCardDto';
+import BusinessCardDto from './businessCard/BusinessCardDto';
 import { createContext } from 'react';
-import { NewsStore } from './NewsStore';
+import { NewsStore } from './news/NewsStore';
 
 export interface IAppContext {
   card?: BusinessCardDto;

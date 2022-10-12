@@ -3,7 +3,7 @@ import { AppContext } from '../../data/AppContext';
 import BusinessCardInfo from './BusinessCardInfo/BusinessCardInfo';
 import BusinessCardSkills from './BusinessCardSkills/BusinessCardSkills';
 import BusinessCardProjects from './BusinessCardProjects/BusinessCardProjects';
-import { InitBusinessCard } from '../../data/BusinessCardStore';
+import { InitBusinessCard } from '../../data/businessCard/BusinessCardStore';
 
 const BusinessCard = () => {
   const context = useContext(AppContext);

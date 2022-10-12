@@ -1,4 +1,4 @@
-import BusinessCardDto from './dtos/BusinessCardDto';
+import BusinessCardDto from './BusinessCardDto';
 
 export const InitBusinessCard = () => {
   return {

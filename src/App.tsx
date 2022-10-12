@@ -3,9 +3,9 @@ import './App.css';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { appTheme } from './styles/AppTheme';
 import BasicLayout from './pages/BasicLayout';
-import BusinessCardDto from './data/dtos/BusinessCardDto';
+import BusinessCardDto from './data/businessCard/BusinessCardDto';
 import { AppContext, IAppContext } from './data/AppContext';
-import { NewsStore } from './data/NewsStore';
+import { NewsStore } from './data/news/NewsStore';
 
 function App() {
   const [businessCard, setBusinessCard] = useState<BusinessCardDto | null>(null);

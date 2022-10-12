@@ -1,8 +1,9 @@
 import React, { ReactNode } from 'react';
-import { LoadingValue, LoadingValueState } from './LoadedState';
+import { LoadingValue, LoadingValueError, LoadingValueState } from './LoadedState';
 import { CircularProgress, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import s from './LoadingValueElement.module.sass';
+import axios from 'axios';
 
 interface LoadedStateElementProps<T> {
   state: LoadingValue<T>;
@@ -26,12 +27,19 @@ const LoadingValueElement = observer(<T,>({ state, loadedLayout }: LoadedStateEl
       );
     case LoadingValueState.Loaded:
       return <div>{loadedLayout(state.value!)}</div>;
-    default: //TODO: add error text
+    default: {
+      //TODO: add error text
+      let errorMessage = 'Error! ';
+      const error = (state as LoadingValueError<T>).error;
+      if (error && axios.isAxiosError(error)) {
+        errorMessage += error.message;
+      }
       return (
         <div>
-          <Typography variant='h6'>Error!</Typography>
+          <Typography variant='h6'>{errorMessage}</Typography>
         </div>
       );
+    }
   }
 });
 

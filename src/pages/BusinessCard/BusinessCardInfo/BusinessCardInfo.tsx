@@ -2,7 +2,7 @@ import React from 'react';
 import s from './BusinessCardInfo.module.sass';
 import { Typography, useTheme } from '@mui/material';
 import { BorderedCard } from '../../../components/BorderedCard/BorderedCard';
-import BusinessCardDto from '../../../data/dtos/BusinessCardDto';
+import BusinessCardDto from '../../../data/businessCard/BusinessCardDto';
 import ButtonRef from '../../../components/ButtonRef/ButtonRef';
 
 const BusinessCardInfo = ({ card }: { card: BusinessCardDto }) => {

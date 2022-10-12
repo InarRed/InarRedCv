@@ -1,13 +1,14 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { PostDto, PostListDto, PostListItemDto } from './dtos/PostDto';
+import { OnePostDto, PostListDto } from './PostDto';
 import {
   LoadingValue,
   LoadingValueError,
   LoadingValueLoaded,
   LoadingValueLoading,
-} from './load/LoadedState';
-import { $host } from './http/axios';
+} from '../load/LoadedState';
+import { $host } from '../http/axios';
 import axios from 'axios';
+import { loadWrapper } from '../load/loadWrapper';
 
 export class NewsStore {
   constructor() {
@@ -37,5 +38,9 @@ export class NewsStore {
         }
       });
     }
+  }
+
+  public async getOnePost(id: number, setPost: (post: LoadingValue<OnePostDto>) => void) {
+    await loadWrapper(async () => (await $host.get<OnePostDto>(`posts/${id}`)).data, null, setPost);
   }
 }

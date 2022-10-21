@@ -1,4 +1,4 @@
-export default interface BusinessCardDto {
+export interface BusinessCardDto {
   name: string;
   myDescription: string;
   contacts: { name: string; ref: string }[];

@@ -1,6 +1,8 @@
-import BusinessCardDto from './BusinessCardDto';
+import { BusinessCardDto } from './BusinessCardDto';
+import { makeAutoObservable, runInAction } from 'mobx';
+import { LoadingValue, LoadingValueLoaded, LoadingValueLoading } from '../load/LoadedState';
 
-export const InitBusinessCard = () => {
+const InitBusinessCard = () => {
   return {
     name: 'Semyon Falitsyn',
     myDescription:
@@ -86,3 +88,17 @@ export const InitBusinessCard = () => {
     ],
   } as BusinessCardDto;
 };
+
+export class BusinessCardStore {
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  businessCard: LoadingValue<BusinessCardDto> = new LoadingValueLoading(null);
+
+  loadBusinessCard() {
+    runInAction(() => {
+      this.businessCard = new LoadingValueLoaded(InitBusinessCard());
+    });
+  }
+}

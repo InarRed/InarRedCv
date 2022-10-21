@@ -1,11 +1,12 @@
-import BusinessCardDto from './businessCard/BusinessCardDto';
 import { createContext } from 'react';
 import { NewsStore } from './news/NewsStore';
+import { UserStore } from './auth/UserStore';
+import { BusinessCardStore } from './businessCard/BusinessCardStore';
 
 export interface IAppContext {
-  card?: BusinessCardDto;
-  setCard: (card: BusinessCardDto) => void;
+  businessCardStore: BusinessCardStore;
   newsStore: NewsStore;
+  userStore: UserStore;
 }
 
 export const AppContext = createContext<IAppContext>(null!);

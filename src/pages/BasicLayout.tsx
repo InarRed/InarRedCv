@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import s from './BasicLayout.module.sass';
 import NavBar from './NavBar/NavBar';
-import BusinessCard from './BusinessCard/BusinessCard';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from './router/routes';
 

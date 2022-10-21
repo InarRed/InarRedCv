@@ -1,26 +1,29 @@
 import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../../data/AppContext';
+import LoadingValueElement from '../../data/load/LoadingValueElement';
 import BusinessCardInfo from './BusinessCardInfo/BusinessCardInfo';
 import BusinessCardSkills from './BusinessCardSkills/BusinessCardSkills';
 import BusinessCardProjects from './BusinessCardProjects/BusinessCardProjects';
-import { InitBusinessCard } from '../../data/businessCard/BusinessCardStore';
+import { observer } from 'mobx-react-lite';
 
-const BusinessCard = () => {
-  const context = useContext(AppContext);
-  const card = context.card;
+const BusinessCard = observer(() => {
+  const { businessCardStore } = useContext(AppContext);
   useEffect(() => {
-    context.setCard(InitBusinessCard());
+    businessCardStore.loadBusinessCard();
   }, []);
 
-  return card ? (
-    <div>
-      <BusinessCardInfo card={card} />
-      <BusinessCardSkills card={card} />
-      <BusinessCardProjects card={card} />
-    </div>
-  ) : (
-    <div>Downloading...</div>
+  return (
+    <LoadingValueElement
+      state={businessCardStore.businessCard}
+      loadedLayout={(value) => (
+        <div>
+          <BusinessCardInfo card={value} />
+          <BusinessCardSkills card={value} />
+          <BusinessCardProjects card={value} />
+        </div>
+      )}
+    />
   );
-};
+});
 
 export default BusinessCard;

@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { appTheme } from './styles/AppTheme';
-import BasicLayout from './pages/BasicLayout';
-import BusinessCardDto from './data/businessCard/BusinessCardDto';
+
 import { AppContext, IAppContext } from './data/AppContext';
 import { NewsStore } from './data/news/NewsStore';
+import { UserStore } from './data/auth/UserStore';
+import LoginAppWrapper from './pages/LoginAppWrapper';
+import { BusinessCardStore } from './data/businessCard/BusinessCardStore';
 
 function App() {
-  const [businessCard, setBusinessCard] = useState<BusinessCardDto | null>(null);
   console.log('Debug!');
   return (
     <ThemeProvider theme={appTheme}>
@@ -16,13 +17,13 @@ function App() {
       <AppContext.Provider
         value={
           {
-            card: businessCard,
-            setCard: setBusinessCard,
+            businessCardStore: new BusinessCardStore(),
             newsStore: new NewsStore(),
+            userStore: new UserStore(),
           } as IAppContext
         }
       >
-        <BasicLayout />
+        <LoginAppWrapper />
       </AppContext.Provider>
     </ThemeProvider>
   );

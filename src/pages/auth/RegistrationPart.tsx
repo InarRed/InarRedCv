@@ -10,11 +10,12 @@ interface RegistrationPartProps {
 
 const RegistrationPart = ({ toLogin }: RegistrationPartProps) => {
   const { userStore } = useContext(AppContext);
-  const [userName, setUserName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState<AuthMessageDto | null>(null);
   const registration = () => {
-    userStore.Registration({ username: userName, password: password }).then((value) => {
+    userStore.Registration({ username, email, password }).then((value) => {
       setMessage(value);
     });
   };
@@ -24,10 +25,11 @@ const RegistrationPart = ({ toLogin }: RegistrationPartProps) => {
         <Typography variant='h5'>Registration</Typography>
         <Button onClick={toLogin}>to login</Button>
       </div>
+      <TextField label='Email' value={email} onChange={(event) => setEmail(event.target.value)} />
       <TextField
         label='Username'
-        value={userName}
-        onChange={(event) => setUserName(event.target.value)}
+        value={username}
+        onChange={(event) => setUsername(event.target.value)}
       />
       <TextField
         label='Password'

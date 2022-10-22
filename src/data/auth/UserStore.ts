@@ -30,9 +30,18 @@ export class UserStore {
     }
   }
 
-  public async Registration(dto: RegistrationDto) {
-    const { data } = await $host.post<AuthMessageDto>('auth/registration', dto);
-    return data;
+  public async Registration(dto: RegistrationDto): Promise<AuthMessageDto> {
+    try {
+      const { data } = await $host.post<AuthMessageDto>('auth/registration', dto);
+      return data;
+    } catch (e) {
+      if (axios.isAxiosError(e))
+        return {
+          successful: false,
+          message: `Error: ${e.message}`,
+        };
+      else throw e;
+    }
   }
 
   public async loadProfile() {

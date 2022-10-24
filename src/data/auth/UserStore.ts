@@ -3,7 +3,8 @@ import { AuthMessageDto, LoginAnswerDto, LoginDto, RegistrationDto, UserDto } fr
 import { $authHost, $host } from '../http/axios';
 import axios from 'axios';
 import { LoadingValue, LoadingValueLoading } from '../load/LoadedState';
-import { loadWrapper } from '../load/loadWrapper';
+import { loadWrapper } from '../load/wrappers/loadWrapper';
+import { Role } from './Role';
 
 export class UserStore {
   constructor() {
@@ -11,7 +12,14 @@ export class UserStore {
   }
 
   //TODO:Add LoadingState and check it everywhere where we use this (f.e. in navbar)
-  public user: LoadingValue<UserDto> = new LoadingValueLoading(null);
+  public user: LoadingValue<UserDto | null> = new LoadingValueLoading(null);
+
+  public get isAdmin(): boolean | null {
+    if (this.user.value) {
+      return !!this.user.value?.roles.includes(Role.Admin);
+    }
+    return null;
+  }
 
   public async Login(dto: LoginDto): Promise<AuthMessageDto> {
     try {
@@ -46,7 +54,14 @@ export class UserStore {
 
   public async loadProfile() {
     await loadWrapper(
-      async () => (await $authHost.get<UserDto>('auth/profile')).data,
+      async () => {
+        try {
+          return (await $authHost.get<UserDto>('auth/profile')).data;
+        } catch (e) {
+          if (axios.isAxiosError(e) && e.response!.status == 401) return null;
+          throw e;
+        }
+      },
       this.user.value,
       (value) => {
         runInAction(() => {

@@ -8,6 +8,7 @@ import axios from 'axios';
 interface LoadedStateElementProps<T> {
   state: LoadingValue<T>;
   loadedLayout: (value: T) => ReactNode;
+  className?: string | undefined;
 }
 
 const LoadingValueElement = observer(<T,>({ state, loadedLayout }: LoadedStateElementProps<T>) => {
@@ -16,9 +17,7 @@ const LoadingValueElement = observer(<T,>({ state, loadedLayout }: LoadedStateEl
       return (
         <div className={s.wrapper}>
           {state.value != null && (
-            <div className={s.contentContainer}>
-              <div>{loadedLayout(state.value!)}</div>
-            </div>
+            <div className={s.contentContainer}>{loadedLayout(state.value!)}</div>
           )}
           <div className={s.circularContainer}>
             <CircularProgress />

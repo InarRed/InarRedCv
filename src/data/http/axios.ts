@@ -23,17 +23,13 @@ $authHost.interceptors.response.use(
     const originalRequest = error.config;
     if (error.response.status == 401 && error.config && !error.config._isRetry) {
       originalRequest._isRetry = true;
-      try {
-        const response = await axios.patch<RefreshAnswerDto>(`${process.env.API_URL}auth/refresh`, {
-          refreshToken: localStorage.getItem('refresh'),
-        });
-        localStorage.setItem('access', response.data.accessToken);
-        localStorage.setItem('refresh', response.data.refreshToken);
-        return innerAuthHost.request(originalRequest);
-      } catch (e) {
-        if (axios.isAxiosError(e) && e.response!.status == 401) return { data: null };
-        throw e;
-      }
+
+      const response = await axios.patch<RefreshAnswerDto>(`${process.env.API_URL}auth/refresh`, {
+        refreshToken: localStorage.getItem('refresh'),
+      });
+      localStorage.setItem('access', response.data.accessToken);
+      localStorage.setItem('refresh', response.data.refreshToken);
+      return innerAuthHost.request(originalRequest);
     }
     throw error;
   },

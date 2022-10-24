@@ -6,9 +6,10 @@ import {
   LoadingValueLoaded,
   LoadingValueLoading,
 } from '../load/LoadedState';
-import { $host } from '../http/axios';
+import { $authHost, $host } from '../http/axios';
 import axios from 'axios';
-import { loadWrapper } from '../load/loadWrapper';
+import { loadWrapper } from '../load/wrappers/loadWrapper';
+import { loadSuccessWrapper } from '../load/wrappers/loadSuccessWrapper';
 
 export class NewsStore {
   constructor() {
@@ -18,29 +19,32 @@ export class NewsStore {
   public Posts: LoadingValue<PostListDto> = new LoadingValueLoading(null);
   public Page: number = 1;
 
-  public async getAll(page: number, limit: number) {
-    runInAction(() => {
-      this.Posts = new LoadingValueLoading(this.Posts.value);
-    });
-
-    try {
-      const { data } = await $host.get<PostListDto>('posts', {
-        params: { page: page, limit: limit },
-      });
-      // await new Promise((r) => setTimeout(r, 2000));
-      runInAction(() => {
-        this.Posts = new LoadingValueLoaded(data);
-      });
-    } catch (e) {
-      runInAction(() => {
-        if (axios.isAxiosError(e)) {
-          this.Posts = new LoadingValueError(this.Posts.value, e.message, e);
-        }
-      });
-    }
+  public async loadAll(page: number, limit: number) {
+    await loadWrapper(
+      async () =>
+        (
+          await $host.get<PostListDto>('posts', {
+            params: { page: page, limit: limit },
+          })
+        ).data,
+      this.Posts.value,
+      (value) => {
+        this.Posts = value;
+      },
+    );
   }
 
   public async getOnePost(id: number, setPost: (post: LoadingValue<OnePostDto>) => void) {
     await loadWrapper(async () => (await $host.get<OnePostDto>(`posts/${id}`)).data, null, setPost);
+  }
+
+  public async update(post: OnePostDto) {
+    return await loadSuccessWrapper(
+      async () => {
+        await $authHost.patch(`posts/${post.id}`, post);
+      },
+      'Saved successfully',
+      (err) => `Error: ${err}`,
+    );
   }
 }

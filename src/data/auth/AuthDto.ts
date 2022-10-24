@@ -27,6 +27,8 @@ export interface AuthMessageDto {
 }
 
 export interface UserDto {
+  id: number;
+  email: string;
   username: string;
   roles: Role[];
 }

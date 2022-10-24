@@ -3,7 +3,7 @@ import {
   LoadingValueError,
   LoadingValueLoaded,
   LoadingValueLoading,
-} from './LoadedState';
+} from '../LoadedState';
 import axios from 'axios';
 
 export const loadWrapper = async <T>(
@@ -14,7 +14,7 @@ export const loadWrapper = async <T>(
   setLoadingValue(new LoadingValueLoading(previousLoadingValue));
   try {
     const data = await loader();
-    // await new Promise((r) => setTimeout(r, 2000));
+    //await new Promise((r) => setTimeout(r, 2000));
     setLoadingValue(new LoadingValueLoaded(data));
   } catch (e) {
     if (axios.isAxiosError(e)) {

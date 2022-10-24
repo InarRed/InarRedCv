@@ -8,6 +8,7 @@ import { NewsStore } from './data/news/NewsStore';
 import { UserStore } from './data/auth/UserStore';
 import LoginAppWrapper from './pages/LoginAppWrapper';
 import { BusinessCardStore } from './data/businessCard/BusinessCardStore';
+import {TagsStore} from "./data/tags/TagsStore";
 
 function App() {
   console.log('Debug!');
@@ -20,6 +21,7 @@ function App() {
             businessCardStore: new BusinessCardStore(),
             newsStore: new NewsStore(),
             userStore: new UserStore(),
+            tagsStore: new TagsStore(),
           } as IAppContext
         }
       >

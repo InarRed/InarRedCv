@@ -19,7 +19,7 @@ const NewsPage = observer(() => {
   };
 
   useEffect(() => {
-    newsStore.getAll(page, 20); //.then(() => window.scrollTo({ top: 0 }));
+    newsStore.loadAll(page, 20); //.then(() => window.scrollTo({ top: 0 }));
     window.scrollTo({ top: 0 });
   }, [page]);
 

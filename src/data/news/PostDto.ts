@@ -1,3 +1,5 @@
+import { TagDto } from '../tags/TagDto';
+
 export class PostListItemDto {
   id: number = 0;
   title: string = '';
@@ -17,5 +19,5 @@ export class OnePostDto {
   date: Date = new Date();
   contentPreview: string = '';
   content: string = '';
-  tags: { id: number; name: string }[] = [];
+  tags: TagDto[] = [];
 }

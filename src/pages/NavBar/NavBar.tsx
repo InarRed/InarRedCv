@@ -49,7 +49,9 @@ const NavBar = observer(() => {
             {userStore.user.state == LoadingValueState.Loaded && userStore.user.value != null && (
               <div className={s.innerContainer}>
                 <Typography>{`Hello, ${userStore.user.value.username}`}</Typography>
-                <Button onClick={handleLogout}>LogOut</Button>
+                <Button onClick={handleLogout} variant='outlined'>
+                  LogOut
+                </Button>
               </div>
             )}
             {userStore.user.state == LoadingValueState.Error && (

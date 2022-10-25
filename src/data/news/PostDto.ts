@@ -18,7 +18,7 @@ export class OnePostDto {
   id: number = 0;
   title: string = '';
   creationDate: Date = new Date();
-  publicationDate: Date = new Date();
+  publicationDate: Date | null = null;
   contentPreview: string = '';
   content: string = '';
   tags: TagDto[] = [];

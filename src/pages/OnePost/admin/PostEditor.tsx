@@ -7,8 +7,9 @@ import { SuccessMessageDto } from '../../../data/load/loadDtos';
 import { AppContext } from '../../../data/AppContext';
 import { observer } from 'mobx-react-lite';
 import LoadingValueElement from '../../../data/load/LoadingValueElement';
-import classNames from 'classnames';
 import { TagDto } from '../../../data/tags/TagDto';
+import { DateTimePicker } from '@mui/x-date-pickers';
+import dayjs, { Dayjs } from 'dayjs';
 
 interface PostEditorProps {
   post: OnePostDto;
@@ -29,6 +30,13 @@ const PostEditor = observer(({ post, setPost }: PostEditorProps) => {
   const onTagsChange = (event: React.SyntheticEvent, values: (TagDto | undefined)[]) => {
     setPost({ ...post, tags: values as TagDto[] });
   };
+  const onChangePublicationDate = (value: Dayjs | null) => {
+    if (value) setPost({ ...post, publicationDate: value.toDate() });
+  };
+
+  const setPublicationDate = (value: Date | null) => {
+    setPost({ ...post, publicationDate: value });
+  };
 
   const [message, setMessage] = useState<SuccessMessageDto>();
 
@@ -38,12 +46,7 @@ const PostEditor = observer(({ post, setPost }: PostEditorProps) => {
 
   return (
     <div className={s.editorContainer}>
-      <TextField
-        value={post.title}
-        onChange={onChangeTitle}
-        label='Title'
-        className={s.title}
-      />
+      <TextField value={post.title} onChange={onChangeTitle} label='Title' className={s.title} />
       <TextAreaMultiline
         value={post.contentPreview}
         onChange={onChangePreview}
@@ -76,7 +79,36 @@ const PostEditor = observer(({ post, setPost }: PostEditorProps) => {
         )}
       />
 
-      <Button variant='outlined' color='secondary' onClick={() => update()}>
+      <Typography>Creation date: {dayjs(post.creationDate).format('DD-MM-YYYY HH:mm')}</Typography>
+
+      <div className={s.dateTime}>
+        {post.publicationDate ? (
+          <DateTimePicker
+            label='Publication Date'
+            ampm={false}
+            onChange={onChangePublicationDate}
+            value={dayjs(post.publicationDate)}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        ) : (
+          <Typography>This post is`t published</Typography>
+        )}
+        <Button variant='outlined' color='secondary' onClick={() => setPublicationDate(new Date())}>
+          Set current datetime
+        </Button>
+        {post.publicationDate && (
+          <Button variant='outlined' color='secondary' onClick={() => setPublicationDate(null)}>
+            Remove from publication
+          </Button>
+        )}
+        {post.publicationDate && post.publicationDate > new Date() && (
+          <Typography>
+            Ahtung! This date is bigger than now, so this is suspended publication
+          </Typography>
+        )}
+      </div>
+
+      <Button variant='outlined' onClick={() => update()}>
         Save
       </Button>
       <Typography>{message?.message}</Typography>

@@ -65,7 +65,10 @@ const NewsSidePanel = observer(() => {
         <TagCreateModal
           isOpen={isModalOpen}
           close={() => setIsModalOpen(false)}
-          closeAndUpdateTagsList={(tag) => tagsStore.tags.value?.push(tag)}
+          closeAndUpdateTagsList={(tag) => {
+            setIsModalOpen(false);
+            tagsStore.tags.value?.push(tag);
+          }}
         />
       </div>
     </div>

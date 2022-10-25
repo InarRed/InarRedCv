@@ -26,7 +26,7 @@ const PostItem = ({ post }: PostItemProps) => {
       </Link>
 
       <Typography variant='body2' className={s.date}>
-        {dayjs(post.publicationDate).format('DD-MM-YYYY  hh:mm')}
+        {dayjs(post.publicationDate).format('DD-MM-YYYY HH:mm')}
       </Typography>
       <ReactMarkdown className={s.contentPreview}>{post.contentPreview}</ReactMarkdown>
       <div className={s.tagsContainer}>

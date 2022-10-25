@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import LoadingValueElement from '../../data/load/LoadingValueElement';
 import OnePostPageAdmin from './admin/OnePostPageAdmin';
 import OnePostPageBasic from './user/OnePostPageBasic';
+import s from './OnePostPage.module.sass';
 
 const OnePostPage = () => {
   const { newsStore, userStore, tagsStore } = useContext(AppContext);
@@ -16,18 +17,20 @@ const OnePostPage = () => {
     tagsStore.loadAll();
   }, []);
   return (
-    <LoadingValueElement
-      state={post}
-      loadedLayout={(value) => (
-        <div>
-          {userStore.isAdmin ? (
-            <OnePostPageAdmin post={value} />
-          ) : (
-            <OnePostPageBasic post={value} />
-          )}
-        </div>
-      )}
-    />
+    <div className={s.wrapper}>
+      <LoadingValueElement
+        state={post}
+        loadedLayout={(value) => (
+          <div>
+            {userStore.isAdmin ? (
+              <OnePostPageAdmin post={value} />
+            ) : (
+              <OnePostPageBasic post={value} />
+            )}
+          </div>
+        )}
+      />
+    </div>
   );
 };
 

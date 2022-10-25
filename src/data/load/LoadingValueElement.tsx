@@ -5,41 +5,48 @@ import { observer } from 'mobx-react-lite';
 import s from './LoadingValueElement.module.sass';
 import axios from 'axios';
 
-interface LoadedStateElementProps<T> {
+interface LoadedStateElementProps<T> extends React.HTMLAttributes<HTMLDivElement> {
   state: LoadingValue<T>;
   loadedLayout: (value: T) => ReactNode;
-  className?: string | undefined;
 }
 
-const LoadingValueElement = observer(<T,>({ state, loadedLayout }: LoadedStateElementProps<T>) => {
-  switch (state.state) {
-    case LoadingValueState.Loading:
-      return (
-        <div className={s.wrapper}>
-          {state.value != null && (
-            <div className={s.contentContainer}>{loadedLayout(state.value!)}</div>
-          )}
-          <div className={s.circularContainer}>
-            <CircularProgress />
+const LoadingValueElement = observer(
+  <T,>({ state, loadedLayout, className, ...divProps }: LoadedStateElementProps<T>) => {
+    switch (state.state) {
+      case LoadingValueState.Loading:
+        return (
+          <div className={s.wrapper} {...divProps}>
+            {state.value != null && (
+              <div className={[s.contentContainer, className].join(' ')}>
+                {loadedLayout(state.value!)}
+              </div>
+            )}
+            <div className={s.circularContainer}>
+              <CircularProgress />
+            </div>
           </div>
-        </div>
-      );
-    case LoadingValueState.Loaded:
-      return <div>{loadedLayout(state.value!)}</div>;
-    default: {
-      //TODO: add error text
-      let errorMessage = 'Error! ';
-      const error = (state as LoadingValueError<T>).error;
-      if (error && axios.isAxiosError(error)) {
-        errorMessage += error.message;
+        );
+      case LoadingValueState.Loaded:
+        return (
+          <div className={className} {...divProps}>
+            {loadedLayout(state.value!)}
+          </div>
+        );
+      default: {
+        //TODO: add error text
+        let errorMessage = 'Error! ';
+        const error = (state as LoadingValueError<T>).error;
+        if (error && axios.isAxiosError(error)) {
+          errorMessage += error.message;
+        }
+        return (
+          <div className={className} {...divProps}>
+            <Typography variant='h6'>{errorMessage}</Typography>
+          </div>
+        );
       }
-      return (
-        <div>
-          <Typography variant='h6'>{errorMessage}</Typography>
-        </div>
-      );
     }
-  }
-});
+  },
+);
 
 export default LoadingValueElement;

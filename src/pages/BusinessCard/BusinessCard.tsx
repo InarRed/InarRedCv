@@ -5,6 +5,7 @@ import BusinessCardInfo from './BusinessCardInfo/BusinessCardInfo';
 import BusinessCardSkills from './BusinessCardSkills/BusinessCardSkills';
 import BusinessCardProjects from './BusinessCardProjects/BusinessCardProjects';
 import { observer } from 'mobx-react-lite';
+import s from './BusinessCard.module.sass';
 
 const BusinessCard = observer(() => {
   const { businessCardStore } = useContext(AppContext);
@@ -15,12 +16,13 @@ const BusinessCard = observer(() => {
   return (
     <LoadingValueElement
       state={businessCardStore.businessCard}
+      className={s.wrapper}
       loadedLayout={(value) => (
-        <div>
+        <>
           <BusinessCardInfo card={value} />
           <BusinessCardSkills card={value} />
           <BusinessCardProjects card={value} />
-        </div>
+        </>
       )}
     />
   );

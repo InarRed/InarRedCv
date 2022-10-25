@@ -19,12 +19,12 @@ export class NewsStore {
   public Posts: LoadingValue<PostListDto> = new LoadingValueLoading(null);
   public Page: number = 1;
 
-  public async loadAll(page: number, limit: number) {
+  public async loadAll(page: number, limit: number, tagName: string | undefined) {
     await loadWrapper(
       async () =>
         (
           await $host.get<PostListDto>('posts', {
-            params: { page: page, limit: limit },
+            params: { page, limit, tagName },
           })
         ).data,
       this.Posts.value,

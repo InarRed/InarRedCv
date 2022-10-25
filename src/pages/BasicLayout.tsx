@@ -15,13 +15,11 @@ const BasicLayout = () => {
         </header>
         <div className={s.mainContainer}>
           <aside className={s.leftAside} />
-          <section className={s.mainContent}>
-            <Routes>
-              {routes.map((route) => (
-                <Route path={route.path} element={route.component} key={route.path}></Route>
-              ))}
-            </Routes>
-          </section>
+          <Routes>
+            {routes.map((route) => (
+              <Route path={route.path} element={route.component} key={route.path}></Route>
+            ))}
+          </Routes>
           <aside className={s.rightAside} />
         </div>
         <div className={s.footer}></div>

@@ -4,7 +4,8 @@ export class PostListItemDto {
   id: number = 0;
   title: string = '';
   contentPreview: string = '';
-  date: Date = new Date();
+  creationDate: Date = new Date();
+  publicationDate: Date = new Date();
   tags: { id: number; name: string }[] = [];
 }
 
@@ -16,7 +17,8 @@ export class PostListDto {
 export class OnePostDto {
   id: number = 0;
   title: string = '';
-  date: Date = new Date();
+  creationDate: Date = new Date();
+  publicationDate: Date = new Date();
   contentPreview: string = '';
   content: string = '';
   tags: TagDto[] = [];

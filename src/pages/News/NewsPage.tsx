@@ -35,7 +35,7 @@ const NewsPage = observer(() => {
           loadedLayout={(value) => (
             <>
               {value.data.length == 0 && (
-                <Typography variant='h5'>There are no posts yet.</Typography>
+                <Typography variant='h5'>Here are no posts yet.</Typography>
               )}
               {value.data.map((post) => (
                 <PostItem post={post} key={post.id} />

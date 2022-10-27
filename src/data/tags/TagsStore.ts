@@ -25,7 +25,7 @@ export class TagsStore {
 
   public async createTag(name: string) {
     return await loadInsertionWrapper(
-      async () => (await $authHost.post<InsertionDto>('tags', { name })).data,
+      async () => (await $authHost.post<InsertionDto<TagDto>>('tags', { name })).data,
     );
   }
 }

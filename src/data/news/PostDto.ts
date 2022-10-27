@@ -23,3 +23,11 @@ export class OnePostDto {
   content: string = '';
   tags: TagDto[] = [];
 }
+
+export interface PostCreateDto {
+  title: string;
+  contentPreview: string;
+  content: string;
+  publicationDate: Date | null;
+  tags: { id: number }[];
+}

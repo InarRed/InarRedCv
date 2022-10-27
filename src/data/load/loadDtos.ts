@@ -3,8 +3,8 @@ export interface SuccessMessageDto {
   message: string;
 }
 
-export interface InsertionDto {
+export interface InsertionDto<TInserted> {
   success: boolean;
   message: string;
-  inserted?: object;
+  inserted?: TInserted;
 }

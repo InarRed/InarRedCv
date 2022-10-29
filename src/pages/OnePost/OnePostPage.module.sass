@@ -33,7 +33,7 @@
       margin-left: 0
 
 
-.basicContainer
+.postBasicContainer
   margin: 10px 0
 
   .heading
@@ -44,5 +44,11 @@
     flex-direction: row
     flex-wrap: wrap
 
-    *
+    & > *
       margin: 5px 5px
+
+  .markdown
+
+    img
+      width: styleVars.$one-post-width - 30px
+      margin: 15px

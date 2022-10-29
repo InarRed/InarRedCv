@@ -1,8 +1,9 @@
 import React from 'react';
-import { Chip, Typography } from '@mui/material';
+import { Chip, Divider, Typography } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import { OnePostDto } from '../../../data/news/PostDto';
 import s from '../OnePostPage.module.sass';
+import CommentItem from './CommentItem';
 
 interface OnePostPageBasicProps {
   post: OnePostDto;
@@ -10,7 +11,7 @@ interface OnePostPageBasicProps {
 
 const OnePostPageBasic = ({ post }: OnePostPageBasicProps) => {
   return (
-    <div className={s.basicContainer}>
+    <div className={s.postBasicContainer}>
       <Typography variant='h5' fontWeight='600' className={s.heading}>
         {post.title}
       </Typography>
@@ -20,7 +21,11 @@ const OnePostPageBasic = ({ post }: OnePostPageBasicProps) => {
         ))}
       </div>
       <ReactMarkdown>{post.contentPreview}</ReactMarkdown>
-      <ReactMarkdown>{post.content}</ReactMarkdown>
+      <ReactMarkdown className={s.markdown}>{post.content}</ReactMarkdown>
+      <Divider />
+      {post.comments.map((c) => (
+        <CommentItem comment={c} key={c.id} />
+      ))}
     </div>
   );
 };

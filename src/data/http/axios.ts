@@ -29,9 +29,14 @@ $authHost.interceptors.response.use(
       });
       localStorage.setItem('access', response.data.accessToken);
       localStorage.setItem('refresh', response.data.refreshToken);
-      return innerAuthHost.request(originalRequest);
+      originalRequest.headers['Authorization'] = `Bearer  ${localStorage.getItem('access')}`;
+      return $authHost.request(originalRequest);
+      //return innerAuthHost.request(originalRequest);
     }
     throw error;
   },
 );
+
+
 export { $host, $authHost };
+

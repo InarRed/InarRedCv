@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { OnePostDto } from '../../../data/news/PostDto';
 import { Box, Tab, Tabs } from '@mui/material';
 import PostEditor from './PostEditor';
 import { AppContext } from '../../../data/AppContext';
 import OnePostPageBasic from '../user/OnePostPageBasic';
-import { LoadingValueLoading } from '../../../data/load/LoadedState';
 
 interface OnePostPageAdmin {
   post: OnePostDto;
@@ -12,7 +11,6 @@ interface OnePostPageAdmin {
 
 const OnePostPageAdmin = ({ post }: OnePostPageAdmin) => {
   const [editingPost, setEditingPost] = useState(post);
-  const { tagsStore } = useContext(AppContext);
   const [tab, setTab] = useState('result');
 
   const handleChangeTab = (event: React.SyntheticEvent, newValue: string) => {

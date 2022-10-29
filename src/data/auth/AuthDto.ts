@@ -32,3 +32,8 @@ export interface UserDto {
   username: string;
   roles: Role[];
 }
+
+export interface UserPublicDto {
+  id: number;
+  username: string;
+}

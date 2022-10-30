@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { TagDto } from './TagDto';
 import { LoadingValue, LoadingValueLoading } from '../load/LoadedState';
 import { loadWrapper } from '../load/wrappers/loadWrapper';
-import { $authHost, $host } from '../http/axios';
+import { $authWrapper, $host } from '../http/axios';
 import { loadInsertionWrapper } from '../load/wrappers/loadInsertionWrapper';
 import { InsertionDto } from '../load/loadDtos';
 
@@ -25,7 +25,7 @@ export class TagsStore {
 
   public async createTag(name: string) {
     return await loadInsertionWrapper(
-      async () => (await $authHost.post<InsertionDto<TagDto>>('tags', { name })).data,
+      async () => await $authWrapper((a) => a.post<InsertionDto<TagDto>>('tags', { name })),
     );
   }
 }

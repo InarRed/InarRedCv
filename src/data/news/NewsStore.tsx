@@ -1,16 +1,12 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { OnePostDto, PostCreateDto, PostListDto } from './PostDto';
-import {
-  LoadingValue,
-  LoadingValueError,
-  LoadingValueLoaded,
-  LoadingValueLoading,
-} from '../load/LoadedState';
-import { $authHost, $host } from '../http/axios';
-import axios, { AxiosError } from 'axios';
+import { LoadingValue, LoadingValueLoading } from '../load/LoadedState';
+import { $authWrapper, $host } from '../http/axios';
 import { loadWrapper } from '../load/wrappers/loadWrapper';
 import { loadSuccessWrapper } from '../load/wrappers/loadSuccessWrapper';
 import { InsertionDto } from '../load/loadDtos';
+import { loadInsertionWrapper } from '../load/wrappers/loadInsertionWrapper';
+import { CommentCreateDto, CommentListItemDto } from './CommentDto';
 
 export class NewsStore {
   constructor() {
@@ -35,7 +31,9 @@ export class NewsStore {
         ).data,
       this.Posts.value,
       (value) => {
-        this.Posts = value;
+        runInAction(() => {
+          this.Posts = value;
+        });
       },
     );
   }
@@ -52,17 +50,23 @@ export class NewsStore {
       publicationDate: null,
       tags: [],
     } as PostCreateDto;
-    const data = (await $authHost.post<InsertionDto<OnePostDto>>('posts', post)).data;
+    const data = await $authWrapper((a) => a.post<InsertionDto<OnePostDto>>('posts', post));
     return `/news/post/${data.inserted?.id}`;
   }
 
   public async update(post: OnePostDto) {
     return await loadSuccessWrapper(
       async () => {
-        await $authHost.patch(`posts/${post.id}`, post);
+        await $authWrapper((a) => a.patch(`posts/${post.id}`, post));
       },
       'Saved successfully',
       (err) => `Error: ${err}`,
+    );
+  }
+
+  public async sendComment(data: CommentCreateDto) {
+    return await loadInsertionWrapper<CommentListItemDto>(
+      async () => await $authWrapper((a) => a.post('comments', data)),
     );
   }
 }

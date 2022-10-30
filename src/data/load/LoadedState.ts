@@ -1,12 +1,8 @@
 export abstract class LoadingValue<T> {
-  protected constructor(private _value: T | null, private _state: LoadingValueState) {}
+  protected constructor(public value: T | null, private _state: LoadingValueState) {}
 
   public get state() {
     return this._state;
-  }
-
-  public get value() {
-    return this._value;
   }
 }
 

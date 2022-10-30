@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { AuthMessageDto, LoginAnswerDto, LoginDto, RegistrationDto, UserDto } from './AuthDto';
-import { $authHost, $host } from '../http/axios';
+import { $authWrapper, $host } from '../http/axios';
 import axios from 'axios';
 import { LoadingValue, LoadingValueLoading } from '../load/LoadedState';
 import { loadWrapper } from '../load/wrappers/loadWrapper';
@@ -56,7 +56,7 @@ export class UserStore {
     await loadWrapper(
       async () => {
         try {
-          return (await $authHost.get<UserDto>('auth/profile')).data;
+          return await $authWrapper((a) => a.get<UserDto>('auth/profile'));
         } catch (e) {
           if (axios.isAxiosError(e) && e.response!.status == 401) return null;
           throw e;
@@ -73,7 +73,7 @@ export class UserStore {
 
   public async logout() {
     try {
-      await $authHost.get('auth/logout');
+      await $authWrapper((a) => a.get('auth/logout'));
       localStorage.removeItem('access');
       localStorage.removeItem('refresh');
       await this.loadProfile();

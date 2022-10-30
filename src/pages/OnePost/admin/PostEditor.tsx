@@ -10,38 +10,40 @@ import LoadingValueElement from '../../../data/load/LoadingValueElement';
 import { TagDto } from '../../../data/tags/TagDto';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
+import { OnePostContext } from '../../../data/onePost/OnePostContext';
 
 interface PostEditorProps {
   post: OnePostDto;
-  setPost: (post: OnePostDto) => void;
 }
 
-const PostEditor = observer(({ post, setPost }: PostEditorProps) => {
-  const { newsStore, tagsStore } = useContext(AppContext);
+const PostEditor = observer(({ post }: PostEditorProps) => {
+  const { tagsStore } = useContext(AppContext);
+  const { onePostStore } = useContext(OnePostContext);
   const onChangeTitle = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setPost({ ...post, title: event.target.value });
+    onePostStore.postValue = { ...post, title: event.target.value };
   };
   const onChangePreview = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setPost({ ...post, contentPreview: event.target.value });
+    //TODO: change it on change of value
+    onePostStore.postValue = { ...post, contentPreview: event.target.value };
   };
   const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setPost({ ...post, content: event.target.value });
+    onePostStore.postValue = { ...post, content: event.target.value };
   };
   const onTagsChange = (event: React.SyntheticEvent, values: (TagDto | undefined)[]) => {
-    setPost({ ...post, tags: values as TagDto[] });
+    onePostStore.postValue = { ...post, tags: values as TagDto[] };
   };
   const onChangePublicationDate = (value: Dayjs | null) => {
-    if (value) setPost({ ...post, publicationDate: value.toDate() });
+    if (value) onePostStore.postValue = { ...post, publicationDate: value.toDate() };
   };
 
   const setPublicationDate = (value: Date | null) => {
-    setPost({ ...post, publicationDate: value });
+    onePostStore.postValue = { ...post, publicationDate: value };
   };
 
   const [message, setMessage] = useState<SuccessMessageDto>();
 
-  const update = async () => {
-    setMessage(await newsStore.update(post));
+  const updatePost = async () => {
+    setMessage(await onePostStore.updatePost(post));
   };
 
   return (
@@ -108,7 +110,7 @@ const PostEditor = observer(({ post, setPost }: PostEditorProps) => {
         )}
       </div>
 
-      <Button variant='outlined' onClick={() => update()}>
+      <Button variant='outlined' onClick={() => updatePost()}>
         Save
       </Button>
       <Typography>{message?.message}</Typography>

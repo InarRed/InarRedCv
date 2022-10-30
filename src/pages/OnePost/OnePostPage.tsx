@@ -1,37 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AppContext } from '../../data/AppContext';
-import { OnePostDto } from '../../data/news/PostDto';
-import { LoadingValue, LoadingValueLoading } from '../../data/load/LoadedState';
-import { useParams } from 'react-router-dom';
-import LoadingValueElement from '../../data/load/LoadingValueElement';
-import OnePostPageAdmin from './admin/OnePostPageAdmin';
-import OnePostPageBasic from './user/OnePostPageBasic';
+import React, { useContext } from 'react';
 import s from './OnePostPage.module.sass';
+import { OnePostContext } from '../../data/onePost/OnePostContext';
+import { OnePostStore } from '../../data/onePost/OnePostStore';
+import { AppContext } from '../../data/AppContext';
+import OnePostPageAdmin from './admin/OnePostPageAdmin';
+import OnePostPageUser from './user/OnePostPageUser';
+import { observer } from 'mobx-react-lite';
 
-const OnePostPage = () => {
-  const { newsStore, userStore, tagsStore } = useContext(AppContext);
-  const [post, setPost] = useState<LoadingValue<OnePostDto>>(new LoadingValueLoading(null));
-  const { id } = useParams();
-  useEffect(() => {
-    newsStore.getOnePost(Number(id), setPost);
-    tagsStore.loadAll();
-  }, []);
+const OnePostPage = observer(() => {
+  const { userStore } = useContext(AppContext);
   return (
     <div className={s.wrapper}>
-      <LoadingValueElement
-        state={post}
-        loadedLayout={(value) => (
-          <div>
-            {userStore.isAdmin ? (
-              <OnePostPageAdmin post={value} />
-            ) : (
-              <OnePostPageBasic post={value} />
-            )}
-          </div>
-        )}
-      />
+      <OnePostContext.Provider value={{ onePostStore: new OnePostStore() }}>
+        {userStore.isAdmin ? <OnePostPageAdmin /> : <OnePostPageUser />}
+      </OnePostContext.Provider>
     </div>
   );
-};
+});
 
 export default OnePostPage;

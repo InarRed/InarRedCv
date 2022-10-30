@@ -4,12 +4,14 @@ import ReactMarkdown from 'react-markdown';
 import { OnePostDto } from '../../../data/news/PostDto';
 import s from '../OnePostPage.module.sass';
 import CommentItem from './CommentItem';
+import AddCommentForm from './AddCommentForm';
+import { observer } from 'mobx-react-lite';
 
 interface OnePostPageBasicProps {
   post: OnePostDto;
 }
 
-const OnePostPageBasic = ({ post }: OnePostPageBasicProps) => {
+const OnePostPageUserView = observer(({ post }: OnePostPageBasicProps) => {
   return (
     <div className={s.postBasicContainer}>
       <Typography variant='h5' fontWeight='600' className={s.heading}>
@@ -20,14 +22,15 @@ const OnePostPageBasic = ({ post }: OnePostPageBasicProps) => {
           <Chip key={t.id} label={t.name} />
         ))}
       </div>
-      <ReactMarkdown>{post.contentPreview}</ReactMarkdown>
+      <ReactMarkdown className={s.markdown}>{post.contentPreview}</ReactMarkdown>
       <ReactMarkdown className={s.markdown}>{post.content}</ReactMarkdown>
       <Divider />
       {post.comments.map((c) => (
         <CommentItem comment={c} key={c.id} />
       ))}
+      {/*<AddCommentForm />      {/*<AddCommentForm />*/}
     </div>
   );
-};
+});
 
-export default OnePostPageBasic;
+export default OnePostPageUserView;

@@ -1,5 +1,5 @@
 import { TagDto } from '../tags/TagDto';
-import { UserPublicDto } from '../auth/AuthDto';
+import { CommentListItemDto } from './CommentDto';
 
 export class PostListItemDto {
   id: number = 0;
@@ -32,11 +32,4 @@ export interface PostCreateDto {
   content: string;
   publicationDate: Date | null;
   tags: { id: number }[];
-}
-
-export interface CommentListItemDto {
-  id: number;
-  text: string;
-  date: Date;
-  user: UserPublicDto;
 }

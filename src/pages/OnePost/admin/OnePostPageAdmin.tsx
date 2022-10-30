@@ -1,37 +1,49 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { OnePostDto } from '../../../data/news/PostDto';
 import { Box, Tab, Tabs } from '@mui/material';
 import PostEditor from './PostEditor';
 import { AppContext } from '../../../data/AppContext';
-import OnePostPageBasic from '../user/OnePostPageBasic';
+import OnePostPageUserView from '../user/OnePostPageUserView';
+import { OnePostContext } from '../../../data/onePost/OnePostContext';
+import { useParams } from 'react-router-dom';
+import LoadingValueElement from '../../../data/load/LoadingValueElement';
+import { observer } from 'mobx-react-lite';
 
-interface OnePostPageAdmin {
-  post: OnePostDto;
-}
+const OnePostPageAdmin = observer(() => {
+  const { tagsStore } = useContext(AppContext);
+  const { onePostStore } = useContext(OnePostContext);
+  const { id } = useParams();
 
-const OnePostPageAdmin = ({ post }: OnePostPageAdmin) => {
-  const [editingPost, setEditingPost] = useState(post);
   const [tab, setTab] = useState('result');
+
+  useEffect(() => {
+    tagsStore.loadAll();
+  }, []);
+
+  useEffect(() => {
+    onePostStore.load(Number(id));
+  }, [id]);
 
   const handleChangeTab = (event: React.SyntheticEvent, newValue: string) => {
     setTab(newValue);
   };
 
   return (
-    <div>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={tab} onChange={handleChangeTab}>
-          <Tab label='Result' value={'result'} />
-          <Tab label='Editor' value={'editor'} />
-        </Tabs>
-      </Box>
-      {tab == 'editor' ? (
-        <PostEditor post={editingPost} setPost={setEditingPost} />
-      ) : (
-        <OnePostPageBasic post={editingPost} />
+    <LoadingValueElement
+      state={onePostStore.post}
+      loadedLayout={(value) => (
+        <>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs value={tab} onChange={handleChangeTab}>
+              <Tab label='Result' value={'result'} />
+              <Tab label='Editor' value={'editor'} />
+            </Tabs>
+          </Box>
+          {tab == 'editor' ? <PostEditor post={value} /> : <OnePostPageUserView post={value} />}
+        </>
       )}
-    </div>
+    />
   );
-};
+});
 
 export default OnePostPageAdmin;

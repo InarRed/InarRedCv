@@ -6,5 +6,5 @@ import axios from 'axios';
 import { runInAction } from 'mobx';
 
 export const PostsApi = {
-
+  //TODO: move api here
 };

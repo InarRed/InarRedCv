@@ -13,6 +13,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { OnePostStore } from './data/onePost/OnePostStore';
+import { OnePostContext } from './data/onePost/OnePostContext';
 
 function App() {
   console.log('Debug!');
@@ -20,6 +21,7 @@ function App() {
     <ThemeProvider theme={appTheme}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <CssBaseline />
+
         <AppContext.Provider
           value={
             {
@@ -27,7 +29,6 @@ function App() {
               newsStore: new NewsStore(),
               userStore: new UserStore(),
               tagsStore: new TagsStore(),
-              onePostStore: new OnePostStore(),
             } as IAppContext
           }
         >

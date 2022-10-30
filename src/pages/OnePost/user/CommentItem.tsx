@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@mui/material';
-import { CommentListItemDto } from '../../../data/news/PostDto';
 import dayjs from 'dayjs';
+import { CommentListItemDto } from '../../../data/news/CommentDto';
 
 interface CommentItemProps {
   comment: CommentListItemDto;

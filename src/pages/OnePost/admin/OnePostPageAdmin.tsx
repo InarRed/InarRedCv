@@ -7,9 +7,11 @@ import OnePostPageUserView from '../user/OnePostPageUserView';
 import { useParams } from 'react-router-dom';
 import LoadingValueElement from '../../../data/load/LoadingValueElement';
 import { observer } from 'mobx-react-lite';
+import { OnePostContext } from '../../../data/onePost/OnePostContext';
 
 const OnePostPageAdmin = observer(() => {
-  const { tagsStore, onePostStore } = useContext(AppContext);
+  const { tagsStore } = useContext(AppContext);
+  const { onePostStore } = useContext(OnePostContext);
   const { id } = useParams();
 
   const [tab, setTab] = useState('result');

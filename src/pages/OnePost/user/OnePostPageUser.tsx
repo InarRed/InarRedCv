@@ -4,9 +4,10 @@ import { useParams } from 'react-router-dom';
 import LoadingValueElement from '../../../data/load/LoadingValueElement';
 import OnePostPageUserView from './OnePostPageUserView';
 import { observer } from 'mobx-react-lite';
+import { OnePostContext } from '../../../data/onePost/OnePostContext';
 
 const OnePostPageUser = observer(() => {
-  const { onePostStore } = useContext(AppContext);
+  const { onePostStore } = useContext(OnePostContext);
   const { id } = useParams();
   useEffect(() => {
     onePostStore.load(Number(id));

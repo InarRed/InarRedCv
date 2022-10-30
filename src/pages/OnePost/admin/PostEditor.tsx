@@ -10,6 +10,7 @@ import LoadingValueElement from '../../../data/load/LoadingValueElement';
 import { TagDto } from '../../../data/tags/TagDto';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
+import { OnePostContext } from '../../../data/onePost/OnePostContext';
 
 interface PostEditorProps {
   post: OnePostDto;
@@ -17,7 +18,7 @@ interface PostEditorProps {
 
 const PostEditor = observer(({ post }: PostEditorProps) => {
   const { tagsStore } = useContext(AppContext);
-  const { onePostStore } = useContext(AppContext);
+  const { onePostStore } = useContext(OnePostContext);
   const onChangeTitle = (event: ChangeEvent<HTMLTextAreaElement>) => {
     onePostStore.postValue = { ...post, title: event.target.value };
   };

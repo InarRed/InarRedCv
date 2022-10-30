@@ -10,7 +10,6 @@ export interface IAppContext {
   newsStore: NewsStore;
   userStore: UserStore;
   tagsStore: TagsStore;
-  onePostStore: OnePostStore;
 }
 
 export const AppContext = createContext<IAppContext>(null!);

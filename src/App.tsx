@@ -12,6 +12,7 @@ import { TagsStore } from './data/tags/TagsStore';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { OnePostStore } from './data/onePost/OnePostStore';
 
 function App() {
   console.log('Debug!');
@@ -26,6 +27,7 @@ function App() {
               newsStore: new NewsStore(),
               userStore: new UserStore(),
               tagsStore: new TagsStore(),
+              onePostStore: new OnePostStore(),
             } as IAppContext
           }
         >

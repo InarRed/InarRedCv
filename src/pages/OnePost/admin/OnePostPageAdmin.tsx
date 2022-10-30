@@ -4,14 +4,12 @@ import { Box, Tab, Tabs } from '@mui/material';
 import PostEditor from './PostEditor';
 import { AppContext } from '../../../data/AppContext';
 import OnePostPageUserView from '../user/OnePostPageUserView';
-import { OnePostContext } from '../../../data/onePost/OnePostContext';
 import { useParams } from 'react-router-dom';
 import LoadingValueElement from '../../../data/load/LoadingValueElement';
 import { observer } from 'mobx-react-lite';
 
 const OnePostPageAdmin = observer(() => {
-  const { tagsStore } = useContext(AppContext);
-  const { onePostStore } = useContext(OnePostContext);
+  const { tagsStore, onePostStore } = useContext(AppContext);
   const { id } = useParams();
 
   const [tab, setTab] = useState('result');

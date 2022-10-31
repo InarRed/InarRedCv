@@ -16,7 +16,14 @@ export class OnePostStore {
     makeAutoObservable(this);
   }
 
-  public post: LoadingValue<OnePostDto> = new LoadingValueLoading(null);
+  private _post: LoadingValue<OnePostDto> = new LoadingValueLoading(null);
+  public get post() {
+    return this._post;
+  }
+
+  public set post(value) {
+    this._post = value;
+  }
 
   public set postValue(value: OnePostDto) {
     if (this.post.state == LoadingValueState.Loaded) {
@@ -30,6 +37,7 @@ export class OnePostStore {
       async () => (await $host.get<OnePostDto>(`posts/${id}`)).data,
       this.post.value,
       (value) => {
+        // if (value.value) makeAutoObservable(value.value);
         runInAction(() => {
           this.post = value;
         });

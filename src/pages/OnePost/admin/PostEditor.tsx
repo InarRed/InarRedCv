@@ -20,24 +20,35 @@ const PostEditor = observer(({ post }: PostEditorProps) => {
   const { tagsStore } = useContext(AppContext);
   const { onePostStore } = useContext(OnePostContext);
   const onChangeTitle = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    onePostStore.postValue = { ...post, title: event.target.value };
+    if (onePostStore.post.value) {
+      onePostStore.post.value.title = event.target.value;
+    }
   };
   const onChangePreview = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    //TODO: change it on change of value
-    onePostStore.postValue = { ...post, contentPreview: event.target.value };
+    if (onePostStore.post.value) {
+      onePostStore.post.value.contentPreview = event.target.value;
+    }
   };
   const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    onePostStore.postValue = { ...post, content: event.target.value };
+    if (onePostStore.post.value) {
+      onePostStore.post.value.content = event.target.value;
+    }
   };
   const onTagsChange = (event: React.SyntheticEvent, values: (TagDto | undefined)[]) => {
-    onePostStore.postValue = { ...post, tags: values as TagDto[] };
+    if (onePostStore.post.value) {
+      onePostStore.post.value.tags = values as TagDto[];
+    }
   };
   const onChangePublicationDate = (value: Dayjs | null) => {
-    if (value) onePostStore.postValue = { ...post, publicationDate: value.toDate() };
+    if (onePostStore.post.value) {
+      onePostStore.post.value.publicationDate = value?.toDate() ?? null;
+    }
   };
 
   const setPublicationDate = (value: Date | null) => {
-    onePostStore.postValue = { ...post, publicationDate: value };
+    if (onePostStore.post.value) {
+      onePostStore.post.value.publicationDate = value;
+    }
   };
 
   const [message, setMessage] = useState<SuccessMessageDto>();

@@ -1,5 +1,9 @@
+import { makeAutoObservable, makeObservable, observable } from 'mobx';
+
 export abstract class LoadingValue<T> {
-  protected constructor(public value: T | null, private _state: LoadingValueState) {}
+  protected constructor(public value: T | null, private _state: LoadingValueState) {
+    makeObservable(this, { value: observable });
+  }
 
   public get state() {
     return this._state;

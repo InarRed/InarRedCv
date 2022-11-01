@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, Card, CardContent, Typography } from '@mui/material';
+import { Button, Card, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import { CommentListItemDto } from '../../../../data/news/CommentDto';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';

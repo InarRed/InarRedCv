@@ -1,4 +1,4 @@
-import { styled, TextField, TextFieldProps } from '@mui/material';
+import { styled, TextField } from '@mui/material';
 
 export const TextAreaMultiline = styled(TextField)`
   & label.Mui-focused {

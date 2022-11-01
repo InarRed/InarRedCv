@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { OnePostDto } from '../../../data/news/PostDto';
 import { Box, Tab, Tabs } from '@mui/material';
 import PostEditor from './PostEditor';
 import { AppContext } from '../../../data/AppContext';

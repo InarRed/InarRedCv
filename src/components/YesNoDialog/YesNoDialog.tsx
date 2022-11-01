@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Dialog, DialogTitle, Typography } from '@mui/material';
 import s from './YesNoDialog.module.sass';
-import { InsertionDto, SuccessMessageDto } from '../../data/load/loadDtos';
+import { SuccessMessageDto } from '../../data/load/loadDtos';
 
 interface YesNoDialogProps {
   title: string;

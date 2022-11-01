@@ -1,11 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../../data/AppContext';
 import { useSearchParams } from 'react-router-dom';
-import s from './NewsPage.module.sass';
 import LoadingValueElement from '../../data/load/LoadingValueElement';
 import { Pagination, Typography } from '@mui/material';
 import PostItem from './PostItem';
-import NewsSidePanel from './sidePanel/NewsSidePanel';
 import { observer } from 'mobx-react-lite';
 
 interface NewsPageLoaderProps {

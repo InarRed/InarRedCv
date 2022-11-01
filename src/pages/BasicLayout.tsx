@@ -3,8 +3,6 @@ import s from './BasicLayout.module.sass';
 import NavBar from './NavBar/NavBar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from './router/routes';
-import { OnePostStore } from '../data/onePost/OnePostStore';
-import { OnePostContext } from '../data/onePost/OnePostContext';
 
 const BasicLayout = () => {
   const [isAuth, setIsAuth] = useState(false);

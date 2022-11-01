@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import s from '../../OnePostPage.module.sass';
-import { AppContext } from '../../../../data/AppContext';
 import { CommentListItemDto } from '../../../../data/news/CommentDto';
 import { OnePostContext } from '../../../../data/onePost/OnePostContext';
 import { OnePostDto } from '../../../../data/news/PostDto';

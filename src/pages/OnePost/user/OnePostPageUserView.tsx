@@ -1,12 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Chip, Divider, Typography } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import { OnePostDto } from '../../../data/news/PostDto';
 import s from '../OnePostPage.module.sass';
-import CommentItem from './comments/CommentItem';
-import AddCommentForm from './comments/AddCommentForm';
 import { observer } from 'mobx-react-lite';
-import { AppContext } from '../../../data/AppContext';
 import OnePostComments from './comments/OnePostComments';
 
 interface OnePostPageBasicProps {

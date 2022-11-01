@@ -1,10 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import {
-  LoadingValue,
-  LoadingValueLoaded,
-  LoadingValueLoading,
-  LoadingValueState,
-} from '../load/LoadedState';
+import { LoadingValue, LoadingValueLoading } from '../load/LoadedState';
 import { OnePostDto } from '../news/PostDto';
 import { loadWrapper } from '../load/wrappers/loadWrapper';
 import { $authWrapper, $host } from '../http/axios';

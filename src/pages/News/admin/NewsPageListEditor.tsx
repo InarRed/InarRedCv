@@ -1,8 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import NewsPageLoader from '../NewsPageLoader';
 import { Button } from '@mui/material';
 import PostCreationDialog from './PostCreationDialog';
-import { AppContext } from '../../../data/AppContext';
 
 const NewsPageListEditor = () => {
   const [dialogOpen, setDialogOpen] = useState(false);

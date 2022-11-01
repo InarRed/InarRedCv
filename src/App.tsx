@@ -12,8 +12,6 @@ import { TagsStore } from './data/tags/TagsStore';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { OnePostStore } from './data/onePost/OnePostStore';
-import { OnePostContext } from './data/onePost/OnePostContext';
 
 function App() {
   console.log('Debug!');

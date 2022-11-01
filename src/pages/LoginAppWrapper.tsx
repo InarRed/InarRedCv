@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from '../data/AppContext';
 import BasicLayout from './BasicLayout';
-import {useMount} from "../utils/useMount";
+import { useMount } from '../utils/useMount';
 
 const LoginAppWrapper = () => {
   const { userStore } = useContext(AppContext);

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import { AppContext } from '../../../data/AppContext';
 import { useParams } from 'react-router-dom';
 import LoadingValueElement from '../../../data/load/LoadingValueElement';
 import OnePostPageUserView from './OnePostPageUserView';

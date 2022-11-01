@@ -82,7 +82,7 @@ const InitBusinessCard = () => {
       {
         name: 'This site',
         description: 'you are here',
-        hrefs: [{ name: 'click', ref: 'add it' }],
+        hrefs: [{ name: 'click', ref: 'https://github.com/InarBelkin/CVViewer' }],
         technologies: ['React', 'Webpack', 'Material ui'],
       },
     ],

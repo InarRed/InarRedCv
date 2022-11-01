@@ -60,10 +60,11 @@ const PostEditor = observer(({ post }: PostEditorProps) => {
     setMessage(await onePostStore.updatePost(post));
   };
 
-  const deletePost = async () => {
+  const onDeletePost = async () => {
     const result = await onePostStore.deletePost(post.id);
-    if (result.success) navigate('/posts');
+    if (result.success) navigate('/news');
     else setMessage(result);
+    return result;
   };
 
   return (
@@ -133,13 +134,12 @@ const PostEditor = observer(({ post }: PostEditorProps) => {
       <Button variant='outlined' onClick={() => updatePost()}>
         Save
       </Button>
-      {/*<YesNoDialogButton*/}
-      {/*  title={'Update post'}*/}
-      {/*  onCloseYes={async () => await onePostStore.updatePost(post)}*/}
-      {/*/>*/}
-      <Button variant='outlined' color='error'>
-        Delete
-      </Button>
+      <YesNoDialogButton title='Delete post' onCloseYes={onDeletePost}>
+        <Button variant='outlined' color='error'>
+          Delete
+        </Button>
+      </YesNoDialogButton>
+
       <Typography>{message?.message}</Typography>
     </div>
   );

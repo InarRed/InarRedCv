@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { Button, ButtonProps } from '@mui/material';
 import { SuccessMessageDto } from '../../data/load/loadDtos';
 import YesNoDialog from './YesNoDialog';
+import { ExtendButtonBase } from '@mui/material/ButtonBase';
+import { ButtonTypeMap } from '@mui/material/Button/Button';
 
 interface YesNoDialogButtonProps {
   title: string;
   yesText?: string;
   noText?: string;
   onCloseYes: () => Promise<SuccessMessageDto>;
-  buttonProps?: ButtonProps; //TODO: change on child
+  children: JSX.Element;
 }
 
 const YesNoDialogButton = ({
@@ -16,7 +18,7 @@ const YesNoDialogButton = ({
   yesText,
   noText,
   onCloseYes,
-  buttonProps,
+  children,
 }: YesNoDialogButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState<SuccessMessageDto | undefined>(undefined);
@@ -29,11 +31,9 @@ const YesNoDialogButton = ({
       onCloseYes().then((m) => (m.success ? setIsOpen(false) : setMessage(m)));
     } else setIsOpen(false);
   };
-
-  const resultProps = { ...buttonProps, onClick: open };
   return (
     <>
-      <Button {...resultProps}>Hello</Button>
+      {React.cloneElement(children, { onClick: open })}
       <YesNoDialog
         title={title}
         yesText={yesText}

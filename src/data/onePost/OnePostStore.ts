@@ -25,13 +25,6 @@ export class OnePostStore {
     this._post = value;
   }
 
-  public set postValue(value: OnePostDto) {
-    if (this.post.state == LoadingValueState.Loaded) {
-      runInAction(() => (this.post = new LoadingValueLoaded(value)));
-    }
-    console.log('attempt to change loading post');
-  }
-
   public async load(id: number) {
     await loadWrapper(
       async () => (await $host.get<OnePostDto>(`posts/${id}`)).data,
@@ -48,6 +41,12 @@ export class OnePostStore {
   public async updatePost(post: OnePostDto) {
     return await loadInsertionWrapper<OnePostDto>(
       async () => await $authWrapper((a) => a.patch(`posts/${post.id}`, post)),
+    );
+  }
+
+  public async deletePost(id: number) {
+    return await loadInsertionWrapper(
+      async () => await $authWrapper((a) => a.delete(`posts/${id}`)),
     );
   }
 

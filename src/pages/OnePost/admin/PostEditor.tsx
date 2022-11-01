@@ -11,6 +11,8 @@ import { TagDto } from '../../../data/tags/TagDto';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
 import { OnePostContext } from '../../../data/onePost/OnePostContext';
+import { useNavigate } from 'react-router-dom';
+import YesNoDialogButton from '../../../components/YesNoDialog/YesNoDialogButton';
 
 interface PostEditorProps {
   post: OnePostDto;
@@ -19,6 +21,7 @@ interface PostEditorProps {
 const PostEditor = observer(({ post }: PostEditorProps) => {
   const { tagsStore } = useContext(AppContext);
   const { onePostStore } = useContext(OnePostContext);
+  const navigate = useNavigate();
   const onChangeTitle = (event: ChangeEvent<HTMLTextAreaElement>) => {
     if (onePostStore.post.value) {
       onePostStore.post.value.title = event.target.value;
@@ -55,6 +58,12 @@ const PostEditor = observer(({ post }: PostEditorProps) => {
 
   const updatePost = async () => {
     setMessage(await onePostStore.updatePost(post));
+  };
+
+  const deletePost = async () => {
+    const result = await onePostStore.deletePost(post.id);
+    if (result.success) navigate('/posts');
+    else setMessage(result);
   };
 
   return (
@@ -123,6 +132,13 @@ const PostEditor = observer(({ post }: PostEditorProps) => {
 
       <Button variant='outlined' onClick={() => updatePost()}>
         Save
+      </Button>
+      {/*<YesNoDialogButton*/}
+      {/*  title={'Update post'}*/}
+      {/*  onCloseYes={async () => await onePostStore.updatePost(post)}*/}
+      {/*/>*/}
+      <Button variant='outlined' color='error'>
+        Delete
       </Button>
       <Typography>{message?.message}</Typography>
     </div>

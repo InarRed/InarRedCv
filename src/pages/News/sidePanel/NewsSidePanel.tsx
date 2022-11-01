@@ -10,10 +10,12 @@ import TagCreateModal from './TagCreateModal';
 
 const NewsSidePanel = observer(() => {
   const { tagsStore, userStore } = useContext(AppContext);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const changeTag = (tagName: string) => {
     setSearchParams({ tag: tagName });
   };
+  const tag = searchParams.get('tag');
 
   const clearTag = () => {
     searchParams.delete('tag');
@@ -45,6 +47,7 @@ const NewsSidePanel = observer(() => {
               <>
                 {value.map((t) => (
                   <Chip
+                    variant={tag == t.name ? 'filled' : 'outlined'}
                     onClick={() => {
                       changeTag(t.name);
                     }}

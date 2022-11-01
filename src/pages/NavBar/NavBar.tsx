@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AppBar, Button, CircularProgress, Tab, Tabs, Toolbar, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import s from './NavBar.module.sass';
 import LoginModal from '../auth/LoginModal';
 import { AppContext } from '../../data/AppContext';
@@ -19,26 +19,18 @@ const NavBar = observer(() => {
   };
 
   const navigate = useNavigate();
-  const [tab, setTab] = useState('cv');
+  const location = useLocation();
   const handleSetTab = (event: React.SyntheticEvent, newValue: string) => {
-    setTab(newValue);
-    switch (newValue) {
-      case 'cv':
-        navigate('');
-        break;
-      case 'news':
-        navigate('/news');
-        break;
-    }
+    navigate(newValue);
   };
   return (
     <div>
       <AppBar variant='elevation' position='static'>
         <Toolbar variant='dense'>
           <Typography sx={{ margin: 'auto 20px', fontStyle: 'italic' }}>InarCV</Typography>
-          <Tabs value={tab} onChange={handleSetTab}>
-            <Tab value='cv' label='cv' />
-            <Tab value='news' label='News' />
+          <Tabs value={location.pathname} onChange={handleSetTab}>
+            <Tab value='/' label='cv' />
+            <Tab value='/news' label='News' />
           </Tabs>
           <div className={s.centerSpace} />
           <div className={s.rightNavContainer}>

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Chip, Divider, Typography } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import { OnePostDto } from '../../../data/news/PostDto';
 import s from '../OnePostPage.module.sass';
-import CommentItem from './CommentItem';
-import AddCommentForm from './AddCommentForm';
+import CommentItem from './comments/CommentItem';
+import AddCommentForm from './comments/AddCommentForm';
 import { observer } from 'mobx-react-lite';
+import { AppContext } from '../../../data/AppContext';
+import OnePostComments from './comments/OnePostComments';
 
 interface OnePostPageBasicProps {
   post: OnePostDto;
@@ -25,10 +27,7 @@ const OnePostPageUserView = observer(({ post }: OnePostPageBasicProps) => {
       <ReactMarkdown className={s.markdown}>{post.contentPreview}</ReactMarkdown>
       <ReactMarkdown className={s.markdown}>{post.content}</ReactMarkdown>
       <Divider />
-      {post.comments.map((c) => (
-        <CommentItem comment={c} key={c.id} />
-      ))}
-      {/*<AddCommentForm />      {/*<AddCommentForm />*/}
+      <OnePostComments post={post} />
     </div>
   );
 });

@@ -21,6 +21,13 @@ export class UserStore {
     return null;
   }
 
+  public get isUser(): boolean | null {
+    if (this.user.value) {
+      return !!this.user.value?.roles.includes(Role.User);
+    }
+    return null;
+  }
+
   public async Login(dto: LoginDto): Promise<AuthMessageDto> {
     try {
       const { data } = await $host.post<LoginAnswerDto>('auth/login', dto);

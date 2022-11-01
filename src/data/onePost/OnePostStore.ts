@@ -52,8 +52,23 @@ export class OnePostStore {
   }
 
   public async sendComment(data: CommentCreateDto) {
-    return await loadInsertionWrapper<CommentListItemDto>(
+    const result = await loadInsertionWrapper<CommentListItemDto>(
       async () => await $authWrapper((a) => a.post('comments', data)),
     );
+    if (result.success && result.inserted && this.post.value) {
+      this.post.value.comments.push(result.inserted);
+    }
+    return result;
+  }
+
+  public async deleteComment(id: number) {
+    const result = await loadInsertionWrapper(
+      async () => await $authWrapper((a) => a.delete(`comments/${id}`)),
+    );
+    if (result.success && this.post.value) {
+      const index = this.post.value.comments.findIndex((dto) => dto.id == id);
+      this.post.value.comments.splice(index, 1);
+    }
+    return result;
   }
 }

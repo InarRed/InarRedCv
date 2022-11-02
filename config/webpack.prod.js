@@ -11,7 +11,7 @@ module.exports = (env) =>
     output: {
       path: paths.build,
       filename: 'js/[name].[contenthash].bundle.js',
-      publicPath: '/CVViewer/',
+      publicPath: process.env.WEBPACK_PUBLIC_PATH ?? '/',
       clean: true,
     },
     plugins: [

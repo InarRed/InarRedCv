@@ -23,6 +23,7 @@ jobs:
         env:
           API_URL: ${{secrets.API_URL}}
           PUBLIC_URL: ${{secrets.PUBLIC_URL}}
+          WEBPACK_PUBLIC_PATH: ${{secrets.WEBPACK_PUBLIC_PATH}}
 
       #add tests here later
 

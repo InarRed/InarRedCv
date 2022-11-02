@@ -14,7 +14,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 function App() {
-  console.log('Debug!');
   return (
     <ThemeProvider theme={appTheme}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>

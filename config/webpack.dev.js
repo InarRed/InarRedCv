@@ -4,6 +4,9 @@ const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = (env) =>
   merge(common(env), {
+    output: {
+      publicPath: '/',
+    },
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
@@ -22,7 +25,11 @@ module.exports = (env) =>
             'style-loader',
             {
               loader: 'css-loader',
-              options: { sourceMap: true, importLoaders: 1, modules: true },
+              options: {
+                sourceMap: true,
+                importLoaders: 1,
+                modules: { localIdentName: '[name]__[local]--[hash:base64:5]' },
+              },
             },
             { loader: 'postcss-loader', options: { sourceMap: true } },
             { loader: 'sass-loader', options: { sourceMap: true } },

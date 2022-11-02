@@ -1,0 +1,111 @@
+@use "src/styles/styleVars"
+.wrapper
+  flex-basis: styleVars.$one-post-width
+
+
+.editorContainer
+
+  & > *
+    margin: 10px 0
+
+  .title
+    margin: 10px 0
+    width: 100%
+
+  .textFieldEditor
+    margin: 10px 0
+    width: 100%
+    max-width: 100%
+    resize: none
+
+  .tagsSelector
+    margin: 20px 0
+    display: block
+
+  .dateTime
+    margin: 10px 0
+    display: flex
+
+    button
+      margin: 0 10px
+
+    & + *
+      margin-left: 0
+
+  & > button
+    margin: 10px 20px
+
+
+.postBasicContainer
+  margin: 10px 0
+
+  .heading
+    margin: 10px 0
+
+  .tagsContainer
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+
+    & > *
+      margin: 5px 5px
+
+  .markdown
+
+    img
+      width: styleVars.$one-post-width - 30px
+      margin: 15px
+
+.comment
+  margin: 5px 0
+
+  .userInfo
+    display: flex
+    align-items: center
+
+    .icon
+      font-size: 40px
+      margin: 5px
+
+    .userInfoText
+      display: flex
+      flex-direction: column
+
+    .deleteButton
+      margin-left: auto
+      margin-right: 10px
+
+
+  .text
+    white-space: pre-line
+    margin: 5px 20px
+
+
+.sendContainer
+  display: flex
+  margin: 10px 0
+
+  & > *
+    margin: 5px
+
+  .textField
+    width: 100%
+
+  .sendButton
+    float: right
+    align-self: end
+
+.yesNoButtonsContainer
+  display: grid
+
+  .leftButton
+    grid-column: 1
+    margin: 10px
+
+  .rightButton
+    grid-column: 2
+    margin: 10px
+
+
+
+

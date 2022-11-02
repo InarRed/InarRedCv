@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardActions, CardContent, Typography } from '@mui/material';
-import { BcProject } from '../../../data/dtos/BusinessCardDto';
+import { BcProject } from '../../../data/businessCard/BusinessCardDto';
 import s from './BusinessCardProjects.module.sass';
 import ButtonRef from '../../../components/ButtonRef/ButtonRef';
 

@@ -1,6 +1,8 @@
-import BusinessCardDto from './dtos/BusinessCardDto';
+import { BusinessCardDto } from './BusinessCardDto';
+import { makeAutoObservable, runInAction } from 'mobx';
+import { LoadingValue, LoadingValueLoaded, LoadingValueLoading } from '../load/LoadedState';
 
-export const InitBusinessCard = () => {
+const InitBusinessCard = () => {
   return {
     name: 'Semyon Falitsyn',
     myDescription:
@@ -80,9 +82,23 @@ export const InitBusinessCard = () => {
       {
         name: 'This site',
         description: 'you are here',
-        hrefs: [{ name: 'click', ref: 'add it' }],
+        hrefs: [{ name: 'click', ref: 'https://github.com/InarBelkin/CVViewer' }],
         technologies: ['React', 'Webpack', 'Material ui'],
       },
     ],
   } as BusinessCardDto;
 };
+
+export class BusinessCardStore {
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  businessCard: LoadingValue<BusinessCardDto> = new LoadingValueLoading(null);
+
+  loadBusinessCard() {
+    runInAction(() => {
+      this.businessCard = new LoadingValueLoaded(InitBusinessCard());
+    });
+  }
+}

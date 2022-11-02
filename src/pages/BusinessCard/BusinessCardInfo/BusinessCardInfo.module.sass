@@ -1,3 +1,4 @@
+@use "src/styles/styleVars"
 .info
   display: flex
 
@@ -26,7 +27,7 @@
         margin: 5px
         padding: 5px 10px
 
-@media (max-width: 800px)
+@media (max-width: styleVars.$business-card-width)
   .info
     flex-direction: column
     align-items: center

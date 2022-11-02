@@ -1,0 +1,49 @@
+@use "src/styles/styleVars"
+.wrapper
+  flex-basis: styleVars.$news-wrapper-width
+  display: flex
+
+.mainPanel
+  flex-basis: styleVars.$news-main-panel-width
+
+
+.sidePanel
+  flex-basis: styleVars.$news-wrapper-width - styleVars.$news-main-panel-width
+
+  .tagsSection
+    margin: 20px 0 20px 20px
+
+    .tagsNameWrapper
+      display: flex
+
+    .tagsCard
+      margin: 0 0 20px
+      padding: 5px
+
+    .tagsInner
+      display: flex
+      flex-wrap: wrap
+
+      .chip
+        margin: 5px
+        padding: 0
+
+.modalContainer
+  display: flex
+  flex-direction: column
+
+  *
+    margin-bottom: 10px
+
+
+.postCreationContainer
+  display: grid
+
+  .leftButton
+    grid-column: 1
+
+  .rightButton
+    grid-column: 2
+
+  *
+    margin: 10px

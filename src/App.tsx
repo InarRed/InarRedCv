@@ -1,28 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { appTheme } from './styles/AppTheme';
-import BasicLayout from './pages/BasicLayout';
-import BusinessCardDto from './data/dtos/BusinessCardDto';
-import { AppContext, IAppContext } from './data/BusinessCardContext';
-import { NewsStore } from './data/NewsStore';
+
+import { AppContext, IAppContext } from './data/AppContext';
+import { NewsStore } from './data/news/NewsStore';
+import { UserStore } from './data/auth/UserStore';
+import LoginAppWrapper from './pages/LoginAppWrapper';
+import { BusinessCardStore } from './data/businessCard/BusinessCardStore';
+import { TagsStore } from './data/tags/TagsStore';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 function App() {
-  const [businessCard, setBusinessCard] = useState<BusinessCardDto | null>(null);
+  console.log('Debug!');
   return (
     <ThemeProvider theme={appTheme}>
-      <CssBaseline />
-      <AppContext.Provider
-        value={
-          {
-            card: businessCard,
-            setCard: setBusinessCard,
-            newsStore: new NewsStore(),
-          } as IAppContext
-        }
-      >
-        <BasicLayout />
-      </AppContext.Provider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <CssBaseline />
+
+        <AppContext.Provider
+          value={
+            {
+              businessCardStore: new BusinessCardStore(),
+              newsStore: new NewsStore(),
+              userStore: new UserStore(),
+              tagsStore: new TagsStore(),
+            } as IAppContext
+          }
+        >
+          <LoginAppWrapper />
+        </AppContext.Provider>
+      </LocalizationProvider>
     </ThemeProvider>
   );
 }

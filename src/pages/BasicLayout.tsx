@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import s from './BasicLayout.module.sass';
 import NavBar from './NavBar/NavBar';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from './router/routes';
 
 const BasicLayout = () => {
   const [isAuth, setIsAuth] = useState(false);
   const routes = isAuth ? privateRoutes : publicRoutes;
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className={s.flexContainer}>
         <header className={s.header}>
           <NavBar />
@@ -24,7 +24,7 @@ const BasicLayout = () => {
         </div>
         <div className={s.footer}></div>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

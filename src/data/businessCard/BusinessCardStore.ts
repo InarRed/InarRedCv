@@ -82,8 +82,14 @@ const InitBusinessCard = () => {
       {
         name: 'This site',
         description: 'you are here',
-        hrefs: [{ name: 'click', ref: 'https://github.com/InarBelkin/CVViewer' }],
-        technologies: ['React', 'Webpack', 'Material ui'],
+        hrefs: [
+          { name: 'frontend', ref: 'https://github.com/InarBelkin/CVViewer' },
+          {
+            name: 'backend',
+            ref: 'https://github.com/InarBelkin/inar-cv-server',
+          },
+        ],
+        technologies: ['React', 'Webpack', 'NestJs'],
       },
     ],
   } as BusinessCardDto;
